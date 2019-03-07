@@ -22,6 +22,7 @@
 */
 void BackTrack(string cur,string &digits,int idx,vector<string>&ans){
     if(idx == digits.size()){
+	// special case
         if(idx != 0)
             ans.push_back(cur);
         return;
@@ -75,7 +76,8 @@ void BackTrack(string cur,string &digits,int idx,vector<string>&ans){
             BackTrack(cur + "y",digits,idx+1,ans);
             BackTrack(cur + "z",digits,idx+1,ans);
             break;
-        default:
+	// other digits
+        default:		  
             BackTrack(cur,digits,idx+1,ans);
             break;
     }
