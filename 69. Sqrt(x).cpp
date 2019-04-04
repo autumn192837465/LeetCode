@@ -17,15 +17,15 @@
 				 the decimal part is truncated, 2 is returned.
 */
 int BinarySearch(int left,int right,int &target){
-    long int mid = (left + right)/2;
-    if(target == mid*mid){
+    int mid = (left + right)/2;
+    if(target/mid == mid){
         return mid;
     }
     else if(left + 1 == right){
         return left;
     }
 
-    if (target > mid*mid){
+    if (target/mid > mid){
         return BinarySearch(mid,right,target);
     }
     else{
@@ -37,8 +37,8 @@ public:
     int mySqrt(int x) {
         if(x == 0)  return 0;    
 
-        long int temp = 1;
-        while(temp*temp < x){
+        int temp = 1;
+        while(temp < x/temp){
             temp*=10;
         }
 
