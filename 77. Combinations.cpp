@@ -26,7 +26,7 @@ public:
             ans.push_back(v);
             return;
         }
-        for(int i = n;i;i--){
+        for(int i = n;i>=loop;i--){
             v[loop-1] = i;
             Loop(ans,v,loop-1,i-1);
         }
