@@ -17,6 +17,7 @@
 
 	Your algorithm should run in O(n) time and uses constant extra space.
 */
+// Solution 1 
 class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {        
@@ -44,5 +45,24 @@ public:
             return 1;
         else
             return nums[nums.size()-1]+1;
+    }
+};
+// Solution 2
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        for(int i = 0;i<nums.size();i++){
+            if(nums[i] != i+1){
+                int x = nums[i];
+                while(x > 0 && x <= nums.size() && x!= nums[x-1]){
+                    swap(x,nums[x-1]);
+                }
+
+            }
+        }
+        for(int i =0;i<nums.size();i++){
+            if(i+1 != nums[i])  return i+1;
+        }
+        return nums.size()+1;
     }
 };
