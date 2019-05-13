@@ -11,20 +11,25 @@
     return [0, 1].
 */
 
-public class Solution {
-    public int[] TwoSum(int[] nums, int target) {
-        Hashtable ht = new Hashtable();
-        int[] ans = new int[2];
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        map<int,int> m;
+        map<int,int>::iterator iter;
+        vector<int> ans;
 
-        for(int i=0;i<nums.Length;i++){
-            if(ht.Contains(target - nums[i])){
-                ans[0] = (int)ht[target - nums[i]];
-                ans[1] = i;
+        for(int i=0;i<nums.size();i++){
+            iter = m.find(target - nums[i]);
+            if(iter != m.end()){
+                ans.push_back(iter->second);
+                ans.push_back(i);
+                cout<<ans[0]<<ans[1];
                 return ans;
             }
-            else
-                ht.Add(nums[i],i);
+            else{
+                m.insert(pair<int,int>(nums[i],i));
+            }
         }
         return ans;
     }
-}
+};
