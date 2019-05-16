@@ -29,32 +29,29 @@ public:
         int A = 0;
         int B = 0;
 
-        bool usedA[secret.size()];
-        bool usedB[secret.size()];
-        for(int i =0;i<secret.size();i++){
-            usedA[i] = false;
-            usedB[i] = false;
+        int secretNum[10];
+        int guessNum[10];
+        
+        for(int i =0;i<10;i++){
+            secretNum[i] = 0;
+            guessNum[i] = 0;
         }
 
+        // Find A  
         for(int i =0;i<secret.size();i++){
             if(secret[i] == guess[i]){
-                A++;
-                usedA[i] = true;
-                usedB[i] = true;
+                A++;                
+            }
+            else{
+                
+                secretNum[secret[i] - '0']++;
+                guessNum[guess[i] - '0']++;
             }
          }
-        // Find B
-        for(int i = 0;i<secret.size();i++){
-            if(usedA[i]) continue;
-            for(int j = 0;j<secret.size();j++){
-                if(i == j)  continue;
-                else if(usedB[j]) continue;
-                if(secret[i] == guess[j]){
-                    B++;
-                    usedB[j] = true;
-                    break;
-                }
-            }
+        
+        for(int i =0;i<10;i++){
+            
+            B+= min(secretNum[i],guessNum[i]);            
         }
 
         return to_string(A) + "A" + to_string(B) + "B";
