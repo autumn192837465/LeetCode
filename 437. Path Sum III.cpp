@@ -34,29 +34,24 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
 class Solution {
 public:
     int pathSum(TreeNode* root, int sum) {
-        int ans = 0;
-        Traversal(root,sum,ans);
-        return ans;
-
+        if(!root)   return 0;
+        return Traversal(root,0,sum) + pathSum(root->left,sum) + pathSum(root->right,sum);
     }
-    void Traversal(TreeNode* node,int &sum,int &ans){
-        if(!node)   return;
-
-        TraversalToLeaf(node,0,sum,ans);
-        // Go to next node
-        Traversal(node->left,sum,ans);
-        Traversal(node->right,sum,ans);
-    }
-    void TraversalToLeaf(TreeNode* node,int curSum,int &sum,int &ans){
-        if(!node)   return;
-
+    int Traversal(TreeNode* node,int curSum,int &sum){
+        if(!node)   return 0;
         curSum += node->val;
-        if(curSum == sum)   ans++;
-        TraversalToLeaf(node->left,curSum,sum,ans);
-        TraversalToLeaf(node->right,curSum,sum,ans);
+        return (curSum == sum) + Traversal(node->left,curSum,sum) + Traversal(node->right,curSum,sum);
     }
-
 };
